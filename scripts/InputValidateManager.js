@@ -3,12 +3,14 @@ const InputValidateManager = (function () {
   function init() {
     return {
       validate: function (settings, value) {
-        switch (settings.name) {
-          case "regexp":
+        switch (
+          settings.name // Name of validation
+        ) {
+          case "regexp": // Regular expression
             return settings.regexp.test(value);
             break;
-          case "equal":
-            return value === settings.compareInput.value;
+          case "equal": // Compare 2 values for equality
+            return value === settings.compareInput.value && value;
             break;
           default:
             console.log("Invalid rule of validation!");

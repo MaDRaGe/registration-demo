@@ -31,17 +31,18 @@ class InputControl {
     if (
       InputValidateManager.getInstance().validate(this.validateRule, this.value)
     ) {
-      this.isValid = true;
+      // Input value is valid
       this.timeoutToAlert = setTimeout(() => {
         this.hideAlertDanger();
         this.showAlertSuccess();
       }, 1000);
+      this.isValid = true;
     } else {
-      this.isValid = false;
       this.timeoutToAlert = setTimeout(() => {
         this.showAlertDanger();
         this.hideAlertSuccess();
       }, 1000);
+      this.isValid = false;
     }
   };
 

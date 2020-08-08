@@ -30,6 +30,7 @@ class Form {
   submit = () => {
     this.validate();
     if (!this.isValid) {
+      // Form is not valid
       return;
     }
     console.log(
