@@ -1,14 +1,30 @@
 class Form {
+  /*
+    Constructor
+
+    @params:
+      settings - used for creating form
+        .selector - DOM-element selector of the form
+        .inputList - inputs which are used in the form
+  */
   constructor(settings) {
+    // DOM-element of the form
     this.formElement = document.querySelector(settings.selector);
     this.formElement.onsubmit = (event) => {
       event.preventDefault();
       this.submit();
     };
+
+    // List of inputs which are contained in form
     this.inputList = settings.inputList;
-    this.isValid = false;
+
+    // Form is valid
+    this.isValid;
   }
 
+  /*
+    Validate form by validating inputs in inputList
+  */
   validate = () => {
     let validInputCount = 0;
     for (let key in this.inputList) {
@@ -27,6 +43,9 @@ class Form {
     }
   };
 
+  /*
+    Submit form data
+  */
   submit = () => {
     this.validate();
     if (!this.isValid) {

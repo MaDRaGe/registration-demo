@@ -7,14 +7,21 @@ class InputControl {
     }
   }
 
+  /*
+    Init with the following settings
+
+    @params:
+      settings - used for creating InputControl
+        .selector - DOM-element selector
+        .validateRule - how to validate input value
+        .triggerInputToValidate - the input which schould be validate when the current input is changed
+  */
   init = (settings) => {
+    // DOM-element of the input control
     this.inputControlElement = document.querySelector(`${settings.selector}`);
+
+    // DOM-element of the input field
     this.inputFieldElement = this.inputControlElement.querySelector("input");
-    this.alertElement = this.inputControlElement.querySelector(".input-alert");
-    this.validateRule = settings.validateRule;
-    if (settings.triggerInputToValidate) {
-      this.triggerInputToValidate = settings.triggerInputToValidate;
-    }
     this.inputFieldElement.oninput = () => {
       this.value = this.inputFieldElement.value.trim();
       this.validate();
@@ -22,9 +29,25 @@ class InputControl {
         this.triggerInputToValidate.validate();
       }
     };
-    this.isValid = false;
+
+    // DOM-element of the alert
+    this.alertElement = this.inputControlElement.querySelector(".input-alert");
+
+    // Rule which define how to validate input
+    this.validateRule = settings.validateRule;
+
+    if (settings.triggerInputToValidate) {
+      // Input which should be validated when then input changed
+      this.triggerInputToValidate = settings.triggerInputToValidate;
+    }
+
+    // Input is valid
+    this.isValid;
   };
 
+  /*
+    Validate value in input field
+  */
   validate = () => {
     clearTimeout(this.timeoutToAlert);
     this.value = this.inputFieldElement.value.trim();
